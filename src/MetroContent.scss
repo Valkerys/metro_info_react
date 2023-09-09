@@ -9,15 +9,4 @@
 		center,
 		center
 	);
-
-	.metro-content-title {
-		color: $color-white;
-		font-size: 20px;
-		margin: 0 0 0 10px;
-		text-align: right;
-
-		@media screen and (max-width: $breakpoint-mobile-landscape) {
-			font-size: 14px;
-		}
-	}
 }

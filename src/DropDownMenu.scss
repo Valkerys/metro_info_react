@@ -1,0 +1,76 @@
+@import "./constants.scss";
+
+.drop-down-menu {
+	border-radius: 5px;
+	box-shadow: 2px 0px 12px -2px $color-black;
+	margin: 30px 0 0 0;
+	@include flexbox(
+		column,
+		center,
+		center
+	);
+
+	.drop-down-menu-title {
+		height: 30px;
+		width: 165px;
+		background-color: $color-blue;
+		border-radius: 5px 5px 0 0;
+		color: $color-white;
+		font-size: 20px;
+		font-weight: bold;
+		padding: 0 0 0 10px;
+	}
+
+	.drop-down-menu-choose {
+		height: 25px;
+		width: 175px;
+		background-color: $color-gray;
+		border-radius: 0 0 5px 5px;
+		@include flexbox(
+			column,
+			center,
+			center
+		);
+
+		&:hover, &:focus {
+			background-color: $color-yellow;
+			color: $color-black;
+			cursor: pointer;
+		}
+	}
+
+	.drop-down-menu-options {
+		max-height: 300px;
+		width: 175px;
+		background-color: $color-gray;
+		border-radius: 0 0 5px 5px;
+		overflow-y: scroll;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+
+		.drop-down-menu-route {
+			height: 25px;
+			width: 100%;
+			background-color: $color-gray;
+			color: $color-blue;
+			font-size: 16px;
+			margin: 0;
+			padding: 0;
+			@include flexbox(
+				row,
+				center,
+				center
+			);
+
+			&:hover, &:focus {
+				background-color: $color-yellow;
+				color: $color-black;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.drop-down-menu-options::-webkit-scrollbar {
+    display: none;
+}

@@ -7,6 +7,9 @@
  */
 import React, { useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+
+import { setRoutesList } from "./redux/actions";
 
 import MetroContent from "./MetroContent.jsx";
 import MetroHeader from "./MetroHeader.jsx";
@@ -14,23 +17,29 @@ import MetroHeader from "./MetroHeader.jsx";
 import './App.scss';
 
 function App() {
+	const dispatch = useDispatch();
 
+	/**
+	 * 
+	 * @returns 
+	 */
 	const getRoutes = () => {
 		const url = `${process.env.REACT_APP_METRO_API_URL}/routes`;
-        return axios({
-            method: "GET",
-            url: url,
-        }).then(function (response) {
-            if (response.status !== 200) {
-                throw new Error(response);
-            }
-            console.log(response.data);
-            return response.data;
-        }).catch((error) => {
-            console.log("ERROR: ", error);
-        });
-	};
+		return axios({
+			method: "GET",
+			url: url,
+		}).then(function (response) {
+			if (response.status !== 200) {
+				dispatch(setRoutesList([]));
+				throw new Error(response);
+			}
 
+			dispatch(setRoutesList(response.data));
+		}).catch((error) => {
+			dispatch(setRoutesList([]));
+			console.log("ERROR: ", error);
+		});
+	};
 
 	const mount = () => {
 		getRoutes();
@@ -42,9 +51,7 @@ function App() {
 
 	return (
 		<div className="react-body">
-			
 			<MetroHeader />
-
 			<MetroContent />
 		</div>
 	);

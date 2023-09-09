@@ -13,7 +13,7 @@ function MetroHeader ({
 	showEBooks = true
 }) {
 
-	// const productType = useSelector(state => state.setProductTypeReducer.productType);
+	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
 
 	const mount = () => {
 
@@ -22,9 +22,14 @@ function MetroHeader ({
 	};
 	useEffect(mount, []);
 
+	const routeTitle = routeData ? routeData.route_label : "";
+
 	return (
 		<div className="metro-header">
 			<img src="https://www.metrotransit.org/img/MetroTransitLogo.svg" alt="" />
+			<div className="metro-header-title">
+				{routeTitle}
+			</div>
 			<div className="metro-header-title">
 				Real-time Departures
 			</div>
