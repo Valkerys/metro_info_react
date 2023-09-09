@@ -1,0 +1,21 @@
+// ======== Breakpoints ========
+$breakpoint-desktop: 1024px;
+$breakpoint-image-column: 900px;
+$breakpoint-tablet-portrait: 720px;
+$breakpoint-mobile-landscape: 600px;
+$breakpoint-mobile-portrait: 360px;
+
+// ======== Colors ========
+$color-black: #000000;
+$color-blue: #14213D;
+$color-yellow: #FCA311;
+$color-gray: #E5E5E5;
+$color-white: #FFFFFF;
+
+// ======== Functions ========
+@mixin flexbox($flex-direction: row, $justify-content: flex-start, $align-items: stretch) {
+	display: flex;
+	flex-direction: $flex-direction; // Default: row
+	justify-content: $justify-content; // Default: flex-start
+	align-items: $align-items; // Default: stretch
+}
