@@ -9,4 +9,39 @@
 		center,
 		center
 	);
+
+	.metro-content-dropdowns {
+		height: 80px;
+		margin: 30px 0 20px 0;
+		@include flexbox(
+			row,
+			center,
+			flex-start
+		);
+
+		@media screen and (max-width: $breakpoint-tablet-portrait) {
+			height: unset;
+			margin: 0 0 20px 0;
+			@include flexbox(
+				column,
+				center,
+				center
+			);
+		}
+
+		.metro-content-dropdowns-placeholder {
+			height: 70px;
+			width: 240px;
+			animation: fadeIn ease-in 5s;
+			color: gray;
+			font-size: 20px;
+			font-weight: bold;
+			margin: 20px 0 20px 0;
+			@include flexbox(
+				column,
+				center,
+				center
+			);
+		}
+	}
 }

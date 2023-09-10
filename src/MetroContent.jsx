@@ -23,6 +23,7 @@ function MetroContent ({
 	const directionList = useSelector(state => state.setDirectionListReducer.directionList);
 	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
 	const routesList = useSelector(state => state.setRoutesListReducer.routesList);
+	const stopData = useSelector(state => state.setStopDataReducer.stopData);
 	const stopList = useSelector(state => state.setStopListReducer.stopList);
 
 	/**
@@ -38,6 +39,25 @@ function MetroContent ({
 			url: url,
 		}).then(function (response) {
 			dispatch(setStopList(response.data));
+		}).catch((error) => {
+			console.log("ERROR: ", error);
+		});
+	};
+
+	/**
+	 * 
+	 * @param {*} stopItem 
+	 * @returns 
+	 */
+	const getStopData = (stopItem) => {
+		const url = `${process.env.REACT_APP_METRO_API_URL}/${routeData.route_id}/${directionData.direction_id}/${stopItem.place_code}`;
+
+		return axios({
+			method: "GET",
+			url: url,
+		}).then(function (response) {
+			console.log(response.data);
+			// dispatch(setDirectionList(response.data));
 		}).catch((error) => {
 			console.log("ERROR: ", error);
 		});
@@ -66,7 +86,14 @@ function MetroContent ({
 	 * @param {object} routeItem 
 	 */
 	const routeCallback = (routeItem) => {
-		dispatch(setRouteData(routeItem));
+		if (routeData.route_id !== routeItem.route_id) {
+			dispatch(setRouteData(routeItem));
+			dispatch(setDirectionList([]));
+			dispatch(setStopList([]));
+			dispatch(setDirectionData({}));
+		} else {
+			dispatch(setDirectionData({}));
+		}
 	};
 
 	/**
@@ -74,7 +101,10 @@ function MetroContent ({
 	 * @param {*} directionItem 
 	 */
 	const directionCallback = (directionItem) => {
-		dispatch(setDirectionData(directionItem));
+		if (directionData.direction_name !== directionItem.direction_name) {
+			dispatch(setDirectionData(directionItem));
+			dispatch(setStopList([]));
+		}
 	};
 
 	/**
@@ -82,7 +112,7 @@ function MetroContent ({
 	 * @param {*} stopItem 
 	 */
 	const stopCallback = (stopItem) => {
-		console.log(stopItem);
+		dispatch(setStopData(stopItem));
 	};
 
 	/**
@@ -93,8 +123,8 @@ function MetroContent ({
 	const isObjectEmpty = (objectName) => {
 		return (
 			objectName &&
-			Object.keys(objectName).length === 0 &&
-			objectName.constructor === Object
+			(Object.keys(objectName).length === 0) &&
+			(objectName.constructor === Object)
 		);
 	};
 
@@ -117,35 +147,55 @@ function MetroContent ({
 		}
 	}, [directionData]);
 
+	useEffect(() => {
+		if (!isObjectEmpty(stopData) && (stopData !== undefined)) {
+			getStopData(stopData);
+		}
+	}, [stopData]);
+
 	return (
 		<div className="metro-content">
-			
-			{(routesList.length > 0) &&
-				<DropDownMenu
-					callbackFunc={routeCallback}
-					initialOptionText="Choose A Route"
-					list={routesList}
-					title="Routes"
-				/>
-			}
+			<div className="metro-content-dropdowns">
+				{(routesList.length > 0) &&
+					<DropDownMenu
+						callbackFunc={routeCallback}
+						initialOptionText="Choose A Route"
+						list={routesList}
+						title="Routes"
+					/>
+				}
 
-			{(directionList.length > 0) &&
-				<DropDownMenu
-					callbackFunc={directionCallback}
-					initialOptionText="Choose A Direction"
-					list={directionList}
-					title="Directions"
-				/>
-			}
+				{(directionList.length === 0) &&
+					<div className="metro-content-dropdowns-placeholder" />
+				}
 
-			{(stopList.length > 0) &&
-				<DropDownMenu
-					callbackFunc={stopCallback}
-					initialOptionText="Choose A Stop"
-					list={stopList}
-					title="Stops"
-				/>
-			}
+				{(directionList.length > 0) &&
+					<DropDownMenu
+						callbackFunc={directionCallback}
+						initialOptionText="Choose A Direction"
+						list={directionList}
+						title="Directions"
+					/>
+				}
+
+
+				{(stopList.length === 0) &&
+					<div className="metro-content-dropdowns-placeholder" />
+				}
+
+				{(stopList.length > 0) &&
+					<DropDownMenu
+						callbackFunc={stopCallback}
+						initialOptionText="Choose A Stop"
+						list={stopList}
+						title="Stops"
+					/>
+				}
+			</div>
+
+			<div className="metro-content-table">
+				Table
+			</div>
 		</div>
 	);
 }

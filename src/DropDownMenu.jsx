@@ -37,6 +37,19 @@ function DropDownMenu ({
 	};
 
 	/**
+	 * Handle checking if click is outside menu and return last selection
+	 * @param {object} event 
+	 */
+	const handleClickOutside = (event) => {
+		// only close menu if click NOT in menu or child element
+		const closest = event.target.closest(`#drop-down-menu-${title}`);
+
+		if (!closest) {
+			setRouteListOpen(false);
+		}
+	};
+
+	/**
 	 * 
 	 * @param {*} event 
 	 * @param {object} listItem 
@@ -55,14 +68,17 @@ function DropDownMenu ({
 	};
 
 	const mount = () => {
+		window.addEventListener("click", handleClickOutside);
 
-		const unmount = () => {};
+		const unmount = () => {
+			window.removeEventListener("click", handleClickOutside);
+		};
 		return unmount;
 	};
 	useEffect(mount, []);
 
 	return (
-		<div className="drop-down-menu">
+		<div className="drop-down-menu" id={`drop-down-menu-${title}`}>
 			<div className="drop-down-menu-title">
 				{title}
 			</div>
@@ -70,16 +86,18 @@ function DropDownMenu ({
 				<div
 					className="drop-down-menu-choose"
 					onClick={() => openList()}
+					id={`drop-down-menu-${title}`}
 				>
-					{initialOption}
+					<div className="drop-down-menu-choose-text">
+						{initialOption}
+					</div>
 				</div>
 			}
 
 			{routeListOpen &&
-				<div className="drop-down-menu-options">
+				<div className="drop-down-menu-options" id={`drop-down-menu-${title}`}>
 					{list.map((listItem, i) => {
 						let label;
-						console.log(listItem);
 						if (listItem.route_label) {
 							label = listItem.route_label;
 						} else if (listItem.direction_name) {
@@ -96,7 +114,9 @@ function DropDownMenu ({
 								onClick={() => callbackClick(listItem)}
 								onKeyDown={(event) => onKeyPressRoute(event, listItem)}
 							>
-								{label}
+								<div className="drop-down-menu-route-text">
+									{label}
+								</div>
 							</ul>
 						);
 					})}
