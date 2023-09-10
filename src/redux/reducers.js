@@ -2,11 +2,10 @@
 import { combineReducers } from "redux";
 import {
 	SET_DIRECTION_DATA,
-	SET_DIRECTION_LIST,
 	SET_ROUTE_DATA,
 	SET_ROUTES_LIST,
 	SET_STOP_DATA,
-	SET_STOP_LIST,
+	SET_STOP_TABLE_DATA,
 	SET_STOP_HISTORY
 } from "./actions.js";
 
@@ -21,24 +20,6 @@ const setDirectionDataReducer = (state = setDirectionDataInitialState, action = 
 			returnState = {
 				...state,
 				directionData: action.payload
-			};
-			return returnState;
-		default:
-			return state;
-	}
-};
-
-const setDirectionListInitialState = {
-	directionList: []
-};
-
-const setDirectionListReducer = (state = setDirectionListInitialState, action = {}) => {
-	let returnState;
-	switch (action.type) {
-		case SET_DIRECTION_LIST:
-			returnState = {
-				...state,
-				directionList: action.payload
 			};
 			return returnState;
 		default:
@@ -100,17 +81,17 @@ const setStopDataReducer = (state = setStopDataInitialState, action = {}) => {
 	}
 };
 
-const setStopListInitialState = {
-	stopList: []
+const setStopTableDataInitialState = {
+	stopTableData: {}
 };
 
-const setStopListReducer = (state = setStopListInitialState, action = {}) => {
+const setStopTableDataReducer = (state = setStopTableDataInitialState, action = {}) => {
 	let returnState;
 	switch (action.type) {
-		case SET_STOP_LIST:
+		case SET_STOP_TABLE_DATA:
 			returnState = {
 				...state,
-				stopList: action.payload
+				stopTableData: action.payload
 			};
 			return returnState;
 		default:
@@ -152,10 +133,9 @@ export const initialState = getInitialState();
 
 export const reducers = combineReducers({
 	setDirectionDataReducer,
-	setDirectionListReducer,
 	setRouteDataReducer,
 	setRoutesListReducer,
 	setStopDataReducer,
-	setStopListReducer,
+	setStopTableDataReducer,
 	setStopHistoryReducer,
 });

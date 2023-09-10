@@ -8,9 +8,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
-import { setRouteData, setDirectionList, setDirectionData, setStopData, setStopList } from "./redux/actions";
+import { setRouteData, setDirectionData, setStopData, setStopTableData } from "./redux/actions";
 
-import DropDownMenu  from "./DropDownMenu.jsx";
+import DropDownMenu from "./DropDownMenu.jsx";
+import MetroContentTable from "./MetroContentTable.jsx";
 
 import "./MetroContent.scss";
 
@@ -20,11 +21,12 @@ function MetroContent ({
 	const dispatch = useDispatch();
 
 	const directionData = useSelector(state => state.setDirectionDataReducer.directionData);
-	const directionList = useSelector(state => state.setDirectionListReducer.directionList);
 	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
 	const routesList = useSelector(state => state.setRoutesListReducer.routesList);
 	const stopData = useSelector(state => state.setStopDataReducer.stopData);
-	const stopList = useSelector(state => state.setStopListReducer.stopList);
+
+	const [directionList, setDirectionList] = useState([]);
+	const [stopList, setStopList] = useState([]);
 
 	/**
 	 * 
@@ -38,7 +40,7 @@ function MetroContent ({
 			method: "GET",
 			url: url,
 		}).then(function (response) {
-			dispatch(setStopList(response.data));
+			setStopList(response.data);
 		}).catch((error) => {
 			console.log("ERROR: ", error);
 		});
@@ -56,8 +58,7 @@ function MetroContent ({
 			method: "GET",
 			url: url,
 		}).then(function (response) {
-			console.log(response.data);
-			// dispatch(setDirectionList(response.data));
+			dispatch(setStopTableData(response.data));
 		}).catch((error) => {
 			console.log("ERROR: ", error);
 		});
@@ -75,7 +76,7 @@ function MetroContent ({
 			method: "GET",
 			url: url,
 		}).then(function (response) {
-			dispatch(setDirectionList(response.data));
+			setDirectionList(response.data);
 		}).catch((error) => {
 			console.log("ERROR: ", error);
 		});
@@ -88,9 +89,11 @@ function MetroContent ({
 	const routeCallback = (routeItem) => {
 		if (routeData.route_id !== routeItem.route_id) {
 			dispatch(setRouteData(routeItem));
-			dispatch(setDirectionList([]));
-			dispatch(setStopList([]));
+			setDirectionList([]);
+			setStopList([]);
 			dispatch(setDirectionData({}));
+			dispatch(setStopData({}));
+			dispatch(setStopTableData({}));
 		} else {
 			dispatch(setDirectionData({}));
 		}
@@ -103,7 +106,9 @@ function MetroContent ({
 	const directionCallback = (directionItem) => {
 		if (directionData.direction_name !== directionItem.direction_name) {
 			dispatch(setDirectionData(directionItem));
-			dispatch(setStopList([]));
+			dispatch(setStopData({}));
+			dispatch(setStopTableData({}));
+			setStopList([]);
 		}
 	};
 
@@ -193,9 +198,7 @@ function MetroContent ({
 				}
 			</div>
 
-			<div className="metro-content-table">
-				Table
-			</div>
+			<MetroContentTable />
 		</div>
 	);
 }

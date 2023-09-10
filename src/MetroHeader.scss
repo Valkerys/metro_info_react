@@ -11,6 +11,14 @@
 		center
 	);
 
+	.metro-header-logo {
+		width: 220px;
+
+		@media screen and (max-width: $breakpoint-tablet-portrait) {
+			width: 150px;
+		}
+	}
+
 	.metro-header-title {
 		color: $color-white;
 		font-size: 20px;
@@ -19,6 +27,11 @@
 
 		@media screen and (max-width: $breakpoint-mobile-landscape) {
 			font-size: 14px;
+		}
+
+		&.center {
+			font-weight: bold;
+			text-align: center;
 		}
 	}
 }

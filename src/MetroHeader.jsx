@@ -26,8 +26,12 @@ function MetroHeader ({
 
 	return (
 		<div className="metro-header">
-			<img src="https://www.metrotransit.org/img/MetroTransitLogo.svg" alt="" />
-			<div className="metro-header-title">
+			<img
+				className="metro-header-logo"
+				src="https://www.metrotransit.org/img/MetroTransitLogo.svg"
+				alt=""
+			/>
+			<div className="metro-header-title center">
 				{routeTitle}
 			</div>
 			<div className="metro-header-title">

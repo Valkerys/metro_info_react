@@ -1,24 +1,16 @@
 // actions.js
 
 export const SET_DIRECTION_DATA = "SET_DIRECTION_DATA";
-export const SET_DIRECTION_LIST = "SET_DIRECTION_LIST";
 export const SET_ROUTE_DATA = "SET_ROUTE_DATA";
 export const SET_ROUTES_LIST = "SET_ROUTES_LIST";
 export const SET_STOP_DATA = "SET_STOP_DATA";
-export const SET_STOP_LIST = "SET_STOP_LIST";
+export const SET_STOP_TABLE_DATA = "SET_STOP_TABLE_DATA";
 export const SET_STOP_HISTORY = "SET_STOP_HISTORY";
 
 export const setDirectionData = (directionData) => {
 	return {
 		type: SET_DIRECTION_DATA,
 		payload: directionData
-	};
-};
-
-export const setDirectionList = (directionList) => {
-	return {
-		type: SET_DIRECTION_LIST,
-		payload: directionList
 	};
 };
 
@@ -43,10 +35,10 @@ export const setStopData = (stopData) => {
 	};
 };
 
-export const setStopList = (stopList) => {
+export const setStopTableData = (stopTableData) => {
 	return {
-		type: SET_STOP_LIST,
-		payload: stopList
+		type: SET_STOP_TABLE_DATA,
+		payload: stopTableData
 	};
 };
 
