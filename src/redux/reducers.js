@@ -6,6 +6,7 @@ import {
 	SET_ROUTE_DATA,
 	SET_ROUTES_LIST,
 	SET_STOP_DATA,
+	SET_STOP_LIST,
 	SET_STOP_HISTORY
 } from "./actions.js";
 
@@ -99,6 +100,24 @@ const setStopDataReducer = (state = setStopDataInitialState, action = {}) => {
 	}
 };
 
+const setStopListInitialState = {
+	stopList: []
+};
+
+const setStopListReducer = (state = setStopListInitialState, action = {}) => {
+	let returnState;
+	switch (action.type) {
+		case SET_STOP_LIST:
+			returnState = {
+				...state,
+				stopList: action.payload
+			};
+			return returnState;
+		default:
+			return state;
+	}
+};
+
 const setStopHistoryInitialState = {
 	stopHistory: []
 };
@@ -137,5 +156,6 @@ export const reducers = combineReducers({
 	setRouteDataReducer,
 	setRoutesListReducer,
 	setStopDataReducer,
+	setStopListReducer,
 	setStopHistoryReducer,
 });
