@@ -23,7 +23,7 @@ function App() {
 	 * 
 	 * @returns 
 	 */
-	const getRoutes = () => {
+	const getRoutesData = () => {
 		const url = `${process.env.REACT_APP_METRO_API_URL}/routes`;
 		return axios({
 			method: "GET",
@@ -42,7 +42,7 @@ function App() {
 	};
 
 	const mount = () => {
-		getRoutes();
+		getRoutesData();
 
 		const unmount = () => {};
 		return unmount;

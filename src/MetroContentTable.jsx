@@ -4,11 +4,8 @@
  * Component that contains all components in header and controls their layout
  */
 
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-
-import { setStopTableData } from "./redux/actions";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import metroMap from "./assets/metro_map.png";
 
@@ -20,8 +17,6 @@ function MetroContentTable () {
 	const stopData = useSelector(state => state.setStopDataReducer.stopData);
 	const stopTableData = useSelector(state => state.setStopTableDataReducer.stopTableData);
 	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
-
-	const [routeListOpen, setRouteListOpen] = useState(false);
 
 	/**
 	 * 
@@ -120,8 +115,6 @@ function MetroContentTable () {
 							className={`metro-content-table-content-item ${(i % 2 == 0) ? "" : "white"} ${((stopTableData.departures.length - 1) === i) ? "last" : ""}`}
 							key={i}
 							tabIndex={0}
-							// onClick={() => callbackClick(departureItem)}
-							// onKeyDown={(event) => onKeyPressRoute(event, departureItem)}
 						>
 							<div className="metro-content-table-content-item-route-name">
 								{departureItem.route_short_name}

@@ -15,9 +15,7 @@ import MetroContentTable from "./MetroContentTable.jsx";
 
 import "./MetroContent.scss";
 
-function MetroContent ({
-	showEBooks = true
-}) {
+function MetroContent () {
 	const dispatch = useDispatch();
 
 	const directionData = useSelector(state => state.setDirectionDataReducer.directionData);
@@ -133,13 +131,6 @@ function MetroContent ({
 			(objectName.constructor === Object)
 		);
 	};
-
-	const mount = () => {
-
-		const unmount = () => {};
-		return unmount;
-	};
-	useEffect(mount, []);
 
 	useEffect(() => {
 		if (!isObjectEmpty(routeData)) {
