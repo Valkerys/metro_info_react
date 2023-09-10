@@ -117,6 +117,7 @@ function MetroContent ({
 	 * @param {*} stopItem 
 	 */
 	const stopCallback = (stopItem) => {
+		document.getElementById("metro-content-table").scrollIntoView();
 		dispatch(setStopData(stopItem));
 	};
 

@@ -49,7 +49,7 @@ function MetroContentTable () {
 
 	if (isObjectEmpty(stopTableData)) {
 		return (
-			<div className="metro-content-table">
+			<div className="metro-content-table" id="metro-content-table">
 				<div className="metro-content-table-header">
 					<div className="metro-content-table-header-title">
 						<div className="metro-content-table-header-stop-name">
@@ -87,7 +87,7 @@ function MetroContentTable () {
 	}
 
 	return (
-		<div className="metro-content-table">
+		<div className="metro-content-table" id="metro-content-table">
 			<div className="metro-content-table-header">
 				<div className="metro-content-table-header-title">
 					<div className="metro-content-table-header-stop-name">

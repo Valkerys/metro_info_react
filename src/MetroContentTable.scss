@@ -20,6 +20,10 @@
 			space-between,
 			center
 		);
+
+		@media screen and (max-width: $breakpoint-mobile-landscape) {
+			width: 100%;
+		}
 		
 		.metro-content-table-header-title {
 			color: $color-black;
@@ -31,9 +35,17 @@
 				flex-start
 			);
 
+			@media screen and (max-width: $breakpoint-mobile-landscape) {
+				font-size: 14px;
+			}
+
 			.metro-content-table-header-stop-name {
 				font-size: 18px;
 				font-weight: bold;
+
+				@media screen and (max-width: $breakpoint-mobile-landscape) {
+					font-size: 14px;
+				}
 			}
 		}
 
@@ -41,7 +53,11 @@
 			color: $color-black;
 			font-size: 18px;
 			font-weight: bold;
-			margin: 0 10px 0 0;
+			margin: 0 10px 0 10px;
+
+			@media screen and (max-width: $breakpoint-mobile-landscape) {
+				font-size: 14px;
+			}
 		}
 	}
 
@@ -57,6 +73,10 @@
 			space-between,
 			center
 		);
+
+		@media screen and (max-width: $breakpoint-mobile-landscape) {
+			width: 100%;
+		}
 
 		.metro-content-table-data-titles-text {
 			width: 50px;
