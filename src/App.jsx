@@ -7,12 +7,12 @@
  */
 import React, { useEffect } from "react";
 import axios from "axios";
+import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { setRoutesList } from "./redux/actions";
 
-import MetroContent from "./MetroContent.jsx";
-import MetroHeader from "./MetroHeader.jsx";
+import MetroHomePage from "./MetroHomePage.jsx";
 
 import './App.scss';
 
@@ -20,7 +20,7 @@ function App() {
 	const dispatch = useDispatch();
 
 	/**
-	 * 
+	 * Fetches the list of available routes
 	 * @returns 
 	 */
 	const getRoutesData = () => {
@@ -44,6 +44,11 @@ function App() {
 	const mount = () => {
 		getRoutesData();
 
+		if (!window.location.pathname.includes("/metroRoutes")) {
+			window.location.pathname = "/metroRoutes";
+			return "";
+		}
+
 		const unmount = () => {};
 		return unmount;
 	};
@@ -51,8 +56,10 @@ function App() {
 
 	return (
 		<div className="react-body">
-			<MetroHeader />
-			<MetroContent />
+			<Routes>
+				<Route path="*" component={<MetroHomePage />} />
+				<Route path="/metroRoutes/*" element={<MetroHomePage />} />
+			</Routes>
 		</div>
 	);
 }

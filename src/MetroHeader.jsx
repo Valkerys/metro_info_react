@@ -1,26 +1,17 @@
 /**
- * ProductPicker.jsx
+ * MetroHeader.jsx
  * Purpose:
- * Component that contains all components in header and controls their layout
+ * Component that contains the header for the metro routes website
  */
 
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import "./MetroHeader.scss";
 
-function MetroHeader ({
-	showEBooks = true
-}) {
+function MetroHeader () {
 
 	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
-
-	const mount = () => {
-
-		const unmount = () => {};
-		return unmount;
-	};
-	useEffect(mount, []);
 
 	const routeTitle = routeData ? routeData.route_label : "";
 

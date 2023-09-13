@@ -1,10 +1,10 @@
 /**
  * MetroContentTable.jsx
  * Purpose:
- * Component that contains all components in header and controls their layout
+ * Component that displays the data for a stop and if empty, shows a map
  */
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 import metroMap from "./assets/metro_map.png";
@@ -16,10 +16,9 @@ function MetroContentTable () {
 	const directionData = useSelector(state => state.setDirectionDataReducer.directionData);
 	const stopData = useSelector(state => state.setStopDataReducer.stopData);
 	const stopTableData = useSelector(state => state.setStopTableDataReducer.stopTableData);
-	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
 
 	/**
-	 * 
+	 * Checks if object is empty
 	 * @param {*} objectName 
 	 * @returns 
 	 */
@@ -30,17 +29,6 @@ function MetroContentTable () {
 			(objectName.constructor === Object)
 		);
 	};
-
-	const mount = () => {
-
-		const unmount = () => {};
-		return unmount;
-	};
-	useEffect(mount, []);
-
-	useEffect(() => {
-		
-	}, []);
 
 	if (isObjectEmpty(stopTableData)) {
 		return (
@@ -112,7 +100,7 @@ function MetroContentTable () {
 				{stopTableData.departures.map((departureItem, i) => {
 					return (
 						<ul
-							className={`metro-content-table-content-item ${(i % 2 == 0) ? "" : "white"} ${((stopTableData.departures.length - 1) === i) ? "last" : ""}`}
+							className={`metro-content-table-content-item ${(i % 2 === 0) ? "" : "white"} ${((stopTableData.departures.length - 1) === i) ? "last" : ""}`}
 							key={i}
 							tabIndex={0}
 						>

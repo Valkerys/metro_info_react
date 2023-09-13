@@ -1,10 +1,11 @@
 /**
  * DropDownMenu.jsx
  * Purpose:
- * Component that contains all components in header and controls their layout
+ * Component that displays a given list of items which range from routes, directions and stops
  */
 
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import "./DropDownMenu.scss";
 
@@ -15,11 +16,15 @@ function DropDownMenu ({
 	title
 }) {
 
-	const [routeListOpen, setRouteListOpen] = useState(false);
+	const directionData = useSelector(state => state.setDirectionDataReducer.directionData);
+	const stopData = useSelector(state => state.setStopDataReducer.stopData);
+	const routeData = useSelector(state => state.setRouteDataReducer.routeData);
+
+	const [listOpen, setListOpen] = useState(false);
 	const [initialOption, setInitialOption] = useState(initialOptionText);
 
 	/**
-	 * 
+	 * function that handles the callback click once it has been pressed
 	 * @param {object} listItem 
 	 */
 	const callbackClick = (listItem) => {
@@ -31,7 +36,7 @@ function DropDownMenu ({
 			setInitialOption(listItem.description);
 		}
 
-		setRouteListOpen(false);
+		setListOpen(false);
 		callbackFunc(listItem);
 	};
 
@@ -44,12 +49,12 @@ function DropDownMenu ({
 		const closest = event.target.closest(`#drop-down-menu-${title}`);
 
 		if (!closest) {
-			setRouteListOpen(false);
+			setListOpen(false);
 		}
 	};
 
 	/**
-	 * 
+	 * On Key press if user presses the enter button
 	 * @param {*} event 
 	 * @param {object} listItem 
 	 */
@@ -60,10 +65,10 @@ function DropDownMenu ({
 	};
 
 	/**
-	 * 
+	 * Function that opens the dropdown list
 	 */
 	const openList = () => {
-		setRouteListOpen(true);
+		setListOpen(true);
 	};
 
 	const mount = () => {
@@ -76,12 +81,30 @@ function DropDownMenu ({
 	};
 	useEffect(mount, []);
 
+	useEffect(() => {
+		if (title === "Routes" && routeData.route_label) {
+			setInitialOption(routeData.route_label);
+		}
+	}, [routeData]);
+
+	useEffect(() => {
+		if (title === "Directions" && directionData.direction_name) {
+			setInitialOption(directionData.direction_name);
+		}
+	}, [directionData]);
+
+	useEffect(() => {
+		if (title === "Stops" && stopData.description) {
+			setInitialOption(stopData.description);
+		}
+	}, [stopData]);
+
 	return (
 		<div className="drop-down-menu" id={`drop-down-menu-${title}`}>
 			<div className="drop-down-menu-title">
 				{title}
 			</div>
-			{!routeListOpen &&
+			{!listOpen &&
 				<div
 					className="drop-down-menu-choose"
 					onClick={() => openList()}
@@ -93,7 +116,7 @@ function DropDownMenu ({
 				</div>
 			}
 
-			{routeListOpen &&
+			{listOpen &&
 				<div className="drop-down-menu-options" id={`drop-down-menu-${title}`}>
 					{list.map((listItem, i) => {
 						let label;
