@@ -11,6 +11,7 @@
             - [`npm run build`](#npm-run-build)
             - [`npm run eject`](#npm-run-eject)
         + [Learn More](#learn-more)
+    * [Assumptions](#assumptions)
 
 ## Overview
 
@@ -70,5 +71,13 @@ You can learn more in
 the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Assumptions
+
+- The first assumption was that an user should be able to navigate to a link wheter it has a complete URL or not as well as not having a correct URL. Per example if an user navigates to the URL that has the Route ID, Direction ID and Stop Label, the data should get fetched with the given IDs and data displayed, with the ability to change to another route, direction or stop as well. 
+- My next assuption was if an user has an URL with a correct Route ID but a bad Direction ID, the page should fetch that Route data and set it but ignore the bad direction ID.
+- Another assumption was the routing to always redirect to the metroRoutes path and then add on any more info if needed. Therefore this page would always display but this can easily be change with a given home page. Per example a home page that could include an information center, map or other form of Route data fetching. Therefore create a /metroHome path and make it the default if the URL is not recognizable.
+- I also made the assumption of this application being used in mobile format therefore the layout changes based on that. But doing a max of 360px for the smallest screen size. 
+- The application was also made decently accessible as tabbing works fully. Unfortunately creating Aria Labels that match the options to stop info was not done because of time constraints.
 
 </details>

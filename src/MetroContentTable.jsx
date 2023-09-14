@@ -30,7 +30,7 @@ function MetroContentTable () {
 		);
 	};
 
-	if (isObjectEmpty(stopTableData)) {
+	if (isObjectEmpty(stopTableData) || (stopTableData.departures && (stopTableData.departures.length === 0))) {
 		return (
 			<div className="metro-content-table" id="metro-content-table">
 				<div className="metro-content-table-header">
@@ -63,7 +63,7 @@ function MetroContentTable () {
 						src={metroMap}
 						alt=""
 					/>
-					No Stop Selected
+					{(stopTableData.departures && (stopTableData.departures.length === 0)) ? "No Stops Left for Today" : "No Stop Selected"}
 				</div>
 			</div>
 		);

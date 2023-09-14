@@ -58,7 +58,18 @@ function DropDownMenu ({
 	 * @param {*} event 
 	 * @param {object} listItem 
 	 */
-	const onKeyPressRoute = (event, listItem) => {
+	const onKeyPressOpen = (event) => {
+		if (event.key === "Enter") {
+			openList();
+		}
+	};
+
+	/**
+	 * On Key press if user presses the enter button
+	 * @param {*} event 
+	 * @param {object} listItem 
+	 */
+	const onKeyPressOption = (event, listItem) => {
 		if (event.key === "Enter") {
 			callbackClick(listItem);
 		}
@@ -108,7 +119,9 @@ function DropDownMenu ({
 				<div
 					className="drop-down-menu-choose"
 					onClick={() => openList()}
+					onKeyDown={(event) => onKeyPressOpen(event)}
 					id={`drop-down-menu-${title}`}
+					tabIndex={0}
 				>
 					<div className="drop-down-menu-choose-text">
 						{initialOption}
@@ -134,7 +147,7 @@ function DropDownMenu ({
 								key={i}
 								tabIndex={0}
 								onClick={() => callbackClick(listItem)}
-								onKeyDown={(event) => onKeyPressRoute(event, listItem)}
+								onKeyDown={(event) => onKeyPressOption(event, listItem)}
 							>
 								<div className="drop-down-menu-route-text">
 									{label}
