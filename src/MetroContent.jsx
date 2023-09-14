@@ -277,6 +277,12 @@ function MetroContent () {
 	return (
 		<div className="metro-content">
 			<div className="metro-content-dropdowns">
+				{(routesList.length === 0) &&
+					<div className="metro-content-dropdowns-placeholder">
+						Loading Routes...
+					</div>
+				}
+
 				{(routesList.length > 0) &&
 					<DropDownMenu
 						callbackFunc={routeCallback}

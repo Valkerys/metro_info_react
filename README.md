@@ -12,6 +12,7 @@
             - [`npm run eject`](#npm-run-eject)
         + [Learn More](#learn-more)
     * [Assumptions](#assumptions)
+    * [Limitations](#limitations)
 
 ## Overview
 
@@ -78,6 +79,11 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - My next assuption was if an user has an URL with a correct Route ID but a bad Direction ID, the page should fetch that Route data and set it but ignore the bad direction ID.
 - Another assumption was the routing to always redirect to the metroRoutes path and then add on any more info if needed. Therefore this page would always display but this can easily be change with a given home page. Per example a home page that could include an information center, map or other form of Route data fetching. Therefore create a /metroHome path and make it the default if the URL is not recognizable.
 - I also made the assumption of this application being used in mobile format therefore the layout changes based on that. But doing a max of 360px for the smallest screen size. 
-- The application was also made decently accessible as tabbing works fully. Unfortunately creating Aria Labels that match the options to stop info was not done because of time constraints.
+- The application was also made decently accessible as tabbing works fully so the app is somewhat WCAG complient. Unfortunately creating Aria Labels that match the options to stop info was not done because of time constraints.
+
+### Limitations
+
+- I ran into problems running the jest tests as it does not like the import of things such as axios when rendering in the jest test. I have only done a small amount of jest testing on my own free time as in the company I currently work for has QA create all the automation tests. I have not encounter this issue before and all the remedies online did not help. I can discuss this further.
+- There are fine tuning left on this app because as functional and interactive as it is, there are small details that make the page more enjoyable to use. Things that an user might never notice but would enjoy if given to them, per exaple: The drop down menu, in the scrollable part, adding a shadow at the bottom of the box to indicate that there is more options or a button arrow to further go down and explore the options. Loading spinners, animation transitions and more styling and logic to make the app seem seamlessly even when running on a very slow API endpoint.
 
 </details>
