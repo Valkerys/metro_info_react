@@ -1,4 +1,4 @@
-# `metro_info_react` - Target Metro Project
+# `metro_info_react` - Metro Project
 
 ## Table of Contents
 
